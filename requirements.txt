@@ -2,4 +2,3 @@ Flask
 tensorflow
 numpy
 Pillow
-os
