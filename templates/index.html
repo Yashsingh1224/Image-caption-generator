@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Caption Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    
+    <div class="container">
+        <h1 class="title">Image Caption Generator</h1>
+
+        <form action="/generate" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+            <label class="file-label">
+                <input type="file" name="image" accept="image/*" required>
+                <span>Select an Image</span>
+            </label>
+            <br><br>
+            <input type="submit" value="Generate Caption" class="generate-btn">
+        </form>
+
+        <div id="loading" class="loading-container hidden">
+            <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading...">
+            <p>Generating Caption...</p>
+        </div>
+
+        {% if caption %}
+            <div class="result">
+                <h2>Generated Caption:</h2>
+                <p class="caption-text">{{ caption }}</p>
+                <img src="{{ image_path }}" alt="Uploaded Image" class="preview-img">
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById("loading").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
